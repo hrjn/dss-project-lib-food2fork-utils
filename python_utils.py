@@ -3,6 +3,16 @@ import time
 import os
 import sys
 
+def safe_str(val):
+    if sys.version_info > (3, 0):
+        return str(val)
+    else:
+        if isinstance(val, unicode):
+            return val.encode("utf-8")
+        else:
+            return str(val)
+
+
 def get_file_path(folder_path, file_name):
     # Be careful to enforce that folder_path and file_name are actually strings
     return os.path.join(safe_str(folder_path), safe_str(file_name))
