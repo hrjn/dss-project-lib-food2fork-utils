@@ -28,9 +28,5 @@ def download_files_to_managed_folder(folder_path, files_info, chunk_size=8192):
     for file_info in files_info:
         with open(get_file_path(folder_path, file_info["filename"]), "wb") as f:
             for content in file_info["response"].iter_content(chunk_size=chunk_size):
-                bytes_so_far += len(content)
-                # Only scale to 80% because needs to compute model summary after download
-                percent = int(float(bytes_so_far) / total_size * 80)
-                update_time = update_percent(percent, update_time)
                 f.write(content)
 
